@@ -20,6 +20,8 @@ type
     procedure TestGetValueOrDefault;
     [Test]
     procedure TestCannotAssignNonNilPointer;
+    [Test]
+    procedure TestEmptyString;
   end;
 
 implementation
@@ -111,6 +113,16 @@ begin
   Assert.IsFalse(LNullable.HasValue);
   Assert.IsFalse(LNullable <> nil);
   Assert.IsTrue(LNullable = nil);
+end;
+
+procedure TTestNullable.TestEmptyString;
+var LNullable: Nullable<string>;
+begin
+  LNullable := nil;
+  Assert.IsFalse(LNullable.HasValue);
+  LNullable := '';
+  Assert.IsTrue(LNullable.HasValue);
+  Assert.IsTrue(LNullable = '');
 end;
 
 initialization
