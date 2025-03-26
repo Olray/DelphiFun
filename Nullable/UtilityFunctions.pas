@@ -137,7 +137,7 @@ begin
   if left.HasValue xor right.HasValue then
     Exit(False);
     // both are nil = true
-  if not left.HasValue and not left.HasValue then
+  if not left.HasValue and not right.HasValue then
     Exit(True);
     // compare both non-nil values
   LLeft := left.GetValue;
