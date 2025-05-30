@@ -2,6 +2,11 @@
 
 A collection of some functions I wrote for other applications or out of boredom.
 
+# FindLaunchingShortcut
+
+Find out if your app has been launched by a Shortcut file and retrieve the shortcut's filename.
+Intention: If the shortcut's parameters are invalid you now have the opportunity to ask the user to delete it.
+
 # Nullable
 
 An **extremely simple** implementation of Nullable<T>. Consider using Nullable from the Spring4D framework instead
