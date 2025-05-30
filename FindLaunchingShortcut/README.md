@@ -11,7 +11,7 @@ uses
 [...]
   var LShortcutFinder: IOriginatingShortcutFinder;
   begin
-    LShortcutFinder := TShortcutFinder.Create;
+    LShortcutFinder := TOriginatingShortcutFinder.Create;
     if ShortcutFinder.IsRunByShortcut then
     begin
       Memo1.Lines.Add('App was run by clicking a shortcut');
