@@ -2,6 +2,11 @@
 
 A collection of some functions I wrote for other applications or out of boredom.
 
+# CheckingCertificates
+
+Demo project to read a certificate from any executable and show it's owner, issuing CA, fingerprint and decide
+whether it's trusted by Windows or not.
+
 # FindLaunchingShortcut
 
 Find out if your app has been launched by a Shortcut file and retrieve the shortcut's filename.
