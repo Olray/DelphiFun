@@ -2,6 +2,10 @@
 
 A collection of some functions I wrote for other applications or out of boredom.
 
+# ProgressBar
+
+I needed some simple and embeddable progress bar frame... this is what I came up with in less than 1 hour.
+
 # CheckingCertificates
 
 Demo project to read a certificate from any executable and show it's owner, issuing CA, fingerprint and decide
