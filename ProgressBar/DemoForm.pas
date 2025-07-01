@@ -55,9 +55,17 @@ begin
     begin
       Button1.Enabled := False;
       Button2.Enabled := False;
+
       Progress.SetTitle('Title of the progress thing')
-              .SetAction('Running progress demo')
-              .SetCompletedString('of all work done');
+              .SetCompletedString('of all work done')
+              .ClearActions
+              .AddAction(0, 'just started...')
+              .AddAction(33, 'one third is done...')
+              .AddAction(50, 'we''re half way through the work...')
+              .AddAction(66, 'well on our way...')
+              .AddAction(90, 'almost done, yay!')
+              .AddAction(100, 'work completed!');
+
       for var i := 1 to 100 do
       begin
         Sleep(50);
@@ -68,7 +76,6 @@ begin
     begin
       Button1.Enabled := True;
       Button2.Enabled := True;
-      Progress.SetAction('Progress completed');
     end
   );
 end;

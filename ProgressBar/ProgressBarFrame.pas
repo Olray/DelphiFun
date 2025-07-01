@@ -7,19 +7,35 @@ uses
   Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.StdCtrls;
 
 type
+  TProgressAction = record
+    StartPercentage: Integer;
+    Message: string;
+  end;
+  TProgressActionList = TArray<TProgressAction>;
+
   IProgress = interface
     ['{05290683-7AC6-452A-BD8C-184319239B75}']
       // Initialization
     function SetTitle(const ATitleString: string): IProgress;
     function GetTitle: string;
+    function ClearActions: IProgress;
     function SetAction(const AActionString: string): IProgress;
+    function AddAction(const StartPercentage: Integer; const AActionString: string): IProgress; overload;
     function SetCompletedString(const AString: string): IProgress;
       // progress
     procedure StartProgress(Worker: TProc<IProgress>; Finalizer: TProc<IProgress>);
     procedure SetPercentage(const Percentage: Integer);
-    procedure Finalize;
   end;
 
+  TProgressActionContainer = class
+  private
+    FProgressList: TProgressActionList;
+  public
+    function SetAction(const AActionString: string): TProgressActionContainer;
+    function AddAction(const StartPercentage: Integer; const AMessage: string): TProgressActionContainer; overload;
+    function GetActionStringByPercentage(const Percentage: Integer): string;
+    function Clear: TProgressActionContainer;
+  end;
 
   TProgressFrame = class(TFrame, IProgress)
     lblProgressTitle: TLabel;
@@ -29,18 +45,23 @@ type
     lblActionString: TLabel;
   private
     FPercentage: Integer;
+    FProgressActionList: TProgressActionContainer;
+    procedure UpdateActionLabel;
+    procedure AfterConstruction; override;
+    procedure BeforeDestruction; override;
   public
-    constructor Create(Owner: TComponent);
     function GetProgressInterface: IProgress;
       // Initialization
     function SetTitle(const ATitleString: string): IProgress;
     function GetTitle: string;
-    function SetAction(const AActionString: string): IProgress;
     function SetCompletedString(const AString: string): IProgress;
+      // Actions
+    function ClearActions: IProgress;
+    function SetAction(const AActionString: string): IProgress;
+    function AddAction(const StartPercentage: Integer; const AActionString: string): IProgress; overload;
       // progress
     procedure StartProgress(Worker: TProc<IProgress>; Finalizer: TProc<IProgress>);
     procedure SetPercentage(const Percentage: Integer);
-    procedure Finalize;
   end;
 
 implementation
@@ -60,10 +81,30 @@ end;
 
 { TProgressFrame }
 
-constructor TProgressFrame.Create(Owner: TComponent);
+function TProgressFrame.AddAction(const StartPercentage: Integer; const AActionString: string): IProgress;
+begin
+  FProgressActionList.AddAction(StartPercentage, AActionString);
+  UpdateActionLabel;
+  Result := Self;
+end;
+
+procedure TProgressFrame.AfterConstruction;
 begin
   inherited;
-  SetPercentage(0);
+  FProgressActionList := TProgressActionContainer.Create;
+end;
+
+procedure TProgressFrame.BeforeDestruction;
+begin
+  FProgressActionList.Free;
+  inherited;
+end;
+
+function TProgressFrame.ClearActions: IProgress;
+begin
+  FProgressActionList.Clear;
+  UpdateActionLabel;
+  Result := Self;
 end;
 
 function TProgressFrame.GetProgressInterface: IProgress;
@@ -86,8 +127,11 @@ end;
 
 function TProgressFrame.SetAction(const AActionString: string): IProgress;
 begin
-  lblActionString.Caption := AActionString;
-  MessageLoop;
+  FProgressActionList
+    .Clear
+    .AddAction(0, AActionString);
+
+  UpdateActionLabel;
   Result := Self;
 end;
 
@@ -111,21 +155,91 @@ begin
     pbProgress.Position := Percentage;
     lblPercentageString.Caption := IntToStr(Percentage)+'%';
     FPercentage := NewPercentage;
+    UpdateActionLabel;
   end;
   MessageLoop;
 end;
 
-procedure TProgressFrame.Finalize;
-begin
-  // do nothing in frame. It's destroyed from the owners destructor
-end;
-
 procedure TProgressFrame.StartProgress(Worker, Finalizer: TProc<IProgress>);
 begin
-  if Assigned(Worker) then
-    Worker(Self);
-  if Assigned(Finalizer) then
-    Finalizer(Self);
+  try
+    if Assigned(Worker) then
+      Worker(Self);
+  finally
+    if Assigned(Finalizer) then
+      Finalizer(Self);
+  end;
+end;
+
+procedure TProgressFrame.UpdateActionLabel;
+var
+  AMessage: string;
+begin
+  AMessage := FProgressActionList.GetActionStringByPercentage(FPercentage);
+  lblActionString.Caption := AMessage;
+  MessageLoop;
+end;
+
+{ TProgressActionContainer }
+
+function TProgressActionContainer.GetActionStringByPercentage(const Percentage: Integer): string;
+begin
+  Result := '';
+  if Length(FProgressList) = 0 then
+    Exit;
+  if Length(FProgressList) = 1 then
+    Exit(FProgressList[0].Message);
+
+  for var i := 1 to High(FProgressList) do
+  begin
+    if (Percentage >= FProgressList[i-1].StartPercentage) and (Percentage < FProgressList[i].StartPercentage) then
+      Exit(FProgressList[i-1].Message);
+  end;
+
+  Result := FProgressList[Pred(Length(FProgressList))].Message;
+end;
+
+function TProgressActionContainer.Clear: TProgressActionContainer;
+begin
+  SetLength(FProgressList, 0);
+  Result := Self;
+end;
+
+function TProgressActionContainer.AddAction(const StartPercentage: Integer;
+  const AMessage: string): TProgressActionContainer;
+
+  function MaxStartPercentageFromList: Integer;
+  var
+    TempAction: TProgressAction;
+  begin
+    Result := 0;
+    for TempAction in FProgressList do
+    begin
+      if TempAction.StartPercentage > Result then
+        Result := TempAction.StartPercentage;
+    end;
+  end;
+
+var
+  NewAction: TProgressAction;
+begin
+  NewAction.StartPercentage := StartPercentage;
+  NewAction.Message := AMessage;
+
+  var TempMaxPercentage := MaxStartPercentageFromList;
+  if StartPercentage < TempMaxPercentage then
+  begin
+    NewAction.StartPercentage := TempMaxPercentage;
+  end;
+
+  SetLength(FProgressList, Succ(Length(FProgressList)));
+  FProgressList[Pred(Length(FProgressList))] := NewAction;
+  Result := Self;
+end;
+
+function TProgressActionContainer.SetAction(const AActionString: string): TProgressActionContainer;
+begin
+  Clear.AddAction(0, AActionString);
 end;
 
 end.
