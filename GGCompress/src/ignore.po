@@ -1,0 +1,22 @@
+#  Doesn't look like text
+#. Form1..Caption
+#: DemoForm.dfm:4
+#. Form1..Caption
+#: __recovery/DemoForm.dfm:4
+msgid "Form1"
+msgstr ""
+
+#  Seems like a Font.Name extract
+#. Form1..Label1..Font.Name
+#: __recovery/DemoForm.dfm:25
+msgid "Roboto Lt"
+msgstr ""
+
+#  Seems like a Font.Name extract
+#. Form1..Font.Name
+#: DemoForm.dfm:11
+#. Form1..Font.Name
+#: __recovery/DemoForm.dfm:11
+msgid "Segoe UI"
+msgstr ""
+

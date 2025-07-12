@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{91E844C8-02E3-4F66-8324-40D54E1F655C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="src\CompressCmd.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test\GGCompressTest.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="src\GGCompressDemo.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="CompressCmd">
+        <MSBuild Projects="src\CompressCmd.dproj"/>
+    </Target>
+    <Target Name="CompressCmd:Clean">
+        <MSBuild Projects="src\CompressCmd.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="CompressCmd:Make">
+        <MSBuild Projects="src\CompressCmd.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GGCompressTest">
+        <MSBuild Projects="Test\GGCompressTest.dproj"/>
+    </Target>
+    <Target Name="GGCompressTest:Clean">
+        <MSBuild Projects="Test\GGCompressTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GGCompressTest:Make">
+        <MSBuild Projects="Test\GGCompressTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="GGCompressDemo">
+        <MSBuild Projects="src\GGCompressDemo.dproj"/>
+    </Target>
+    <Target Name="GGCompressDemo:Clean">
+        <MSBuild Projects="src\GGCompressDemo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="GGCompressDemo:Make">
+        <MSBuild Projects="src\GGCompressDemo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="CompressCmd;GGCompressTest;GGCompressDemo"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="CompressCmd:Clean;GGCompressTest:Clean;GGCompressDemo:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="CompressCmd:Make;GGCompressTest:Make;GGCompressDemo:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

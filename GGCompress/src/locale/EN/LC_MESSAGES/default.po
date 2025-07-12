@@ -1,0 +1,55 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2025-07-12 15:09\n"
+"PO-Revision-Date: 2025-07-12 15:12+0200\n"
+"Last-Translator: Markus Stenzel <support@hostingundservice.de>\n"
+"Language-Team: m.stenzel@hostingundservice.de\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.4.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#. Form1..Label1..Caption
+#: __recovery/DemoForm.dfm:21
+msgid "Hallo Welt!"
+msgstr "Hello World!"
+
+#. Form1..Button1..Caption
+#: __recovery/DemoForm.dfm:34
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#. Form1..Button2..Caption
+#: __recovery/DemoForm.dfm:42
+msgid "English"
+msgstr "English"
+
+#. Form1..Button3..Caption
+#: __recovery/DemoForm.dfm:50
+msgid "Español"
+msgstr "Español"
+
+#. Form1..Button4..Caption
+#: __recovery/DemoForm.dfm:58
+msgid "Italiano"
+msgstr "Italiano"
+
+#. Form1..Button5..Caption
+#: __recovery/DemoForm.dfm:66
+msgid "français"
+msgstr "français"
+
+#. Form1..Button6..Caption
+#. Form1..Button7..Caption
+#: __recovery/DemoForm.dfm:74 __recovery/DemoForm.dfm:82
+msgid "Nederlands"
+msgstr "Nederlands"

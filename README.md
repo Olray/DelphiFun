@@ -2,6 +2,10 @@
 
 A collection of some functions I wrote for other applications or out of boredom.
 
+# GGCompress
+
+Demo how to add translations to your app with GnuGetText for Delphi and compress them with ZLib.
+
 # ProgressBar
 
 I needed some simple and embeddable progress bar frame... this is what I came up with in less than 1 hour.
