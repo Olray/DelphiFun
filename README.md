@@ -2,6 +2,19 @@
 
 A collection of some functions I wrote for other applications or out of boredom.
 
+# UnixStreamWriter
+
+From [Wikipedia](https://en.wikipedia.org/wiki/Byte_order_mark): "The Unicode Standard permits the BOM in UTF-8, but
+does not require or recommend its use. UTF-8 always has the same byte order[...]"
+
+Unix/Linux consequently writes log files without a BOM (Byte Order Mark) which indicates the endianness of the system
+writing the file.
+
+When writing utf8 files there are two problems to solve: 1) suppress the BOM mark and 2) use #10 for line breaks.
+This demo app solves both in a quick and dirty, yet easy way.
+
+![hex view of text file](UnixStreamWriter/2025-07-18 unix utf8-no-bom.png)
+
 # GGCompress
 
 Demo how to add translations to your app with GnuGetText for Delphi and compress them with ZLib.
