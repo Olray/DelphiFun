@@ -3,7 +3,7 @@
 AFAIK the GnuGetText for Delphi package is the only FLOSS-compatible translation tool out there. If you want to
 translate your free software and not pay for a proprietary tool you might want to have a look.
 
-Currently, GnuGetText for Delphi is maintained by Dr. Jürgen Rathleff. Find the source 
+Currently, GnuGetText for Delphi is maintained by Dr. Jürgen Rathlev. Find the source 
 [here](https://github.com/jrathlev/GnuGetText-for-Delphi)
 
 Some months ago I have added a function to GnuGetText that allows embedding .mo-files as RCDATA resources instead of
@@ -35,10 +35,10 @@ In Delphi select Project > Ressources and Pictures. Add all your compressed .mo-
 this schema:
 
 ```
-IDR_TRANSLATE_<LNG>_<DOMAIN>_C
+IDR_TRANS_<LNG>_<DOMAIN>_C
 ```
 
 Example: The italian file .\locale\IT\LC_MESSAGES\default.mo.compressed should be added with ID 
-**IDR_TRANSLATE_IT_DEFAULT_C**
+**IDR_TRANS_IT_DEFAULT_C**
 
 Omit the "_C" when adding the **uncompressed** version of your .mo-files which also works.
