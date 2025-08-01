@@ -50,7 +50,7 @@ begin
 
   { Running in background means that Execute() will return immediately.
     Please note that the callback methods are running in a separate thread
-    and you have to take appriopriate measures to report your success or
+    and you have to take appriopriate actions to report your success or
     failure to your app.
     If you have a GUI app you can use something like that for your success
     handler:

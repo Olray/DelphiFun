@@ -3,6 +3,7 @@ unit Executor;
 interface
 uses
   System.SysUtils, // ExtractFilePath, Exception
+  System.Classes, // TThread
   Winapi.Windows, // TProcessInformation
   Executor.Interfaces;
 
@@ -23,6 +24,7 @@ type
     FExitMonitor: IProcessExitWaiter;
       // should we wait in foreground or background?
     FWaitMethod : TWaitMethod;
+    FBackgroundThread: TThread;
       // Waits for process to end in background. Main thread continues running
     function WaitInBackground : Cardinal;
     procedure WaitForProcessExitBackground;
@@ -39,6 +41,7 @@ type
     constructor Create(
           const CreateProcess: ICreateProcess;
           const ExitMethod: IProcessExitWaiter);
+    destructor Destroy; override;
     procedure Execute(
           const WaitMethod: TWaitMethod;
           const ShowWindow: Boolean;
@@ -74,9 +77,6 @@ type
   end;
 
 implementation
-uses
-  System.Classes; // TThread
-
 
 { TExecutor }
 
@@ -91,6 +91,14 @@ begin
   FExitMonitor := ExitMethod;
 
   FLastWin32Error := ERROR_SUCCESS;
+end;
+
+destructor TExecutor.Destroy;
+begin
+  if Assigned(FBackgroundThread) then
+    FBackgroundThread.Terminate;
+  FreeAndNil(FBackgroundThread);
+  inherited;
 end;
 
 procedure TExecutor.Execute(
@@ -236,12 +244,14 @@ begin
   WaitForInputIdle (Pid, INFINITE);
 
     // background thread waiting for process to finish
-  TThread.CreateAnonymousThread(
+  FBackgroundThread := TThread.CreateAnonymousThread(
     procedure
     begin
       WaitForProcessExitBackground;
     end
-  ).Start;
+  );
+  FBackgroundThread.FreeOnTerminate := False;
+  FBackgroundThread.Start;
 
   Result := GetLastError;
   FLastWin32Error := Result;
