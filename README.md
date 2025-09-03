@@ -13,11 +13,13 @@ writing the file.
 When writing utf8 files there are two problems to solve: 1) suppress the BOM mark and 2) use #10 for line breaks.
 This demo app solves both in a quick and dirty, yet easy way.
 
-![hex view of text file](UnixStreamWriter/2025-07-18 unix utf8-no-bom.png)
+![hex view of text file](https://github.com/Olray/DelphiFun/blob/main/UnixStreamWriter/2025-07-18%20unix%20utf8-no-bom.png)
 
 # GGCompress
 
 Demo how to add translations to your app with GnuGetText for Delphi and compress them with ZLib.
+
+This component is used in my [SmartLauncher](https://www.hostingundservice.de/projekte/smart-launcher) freeware app.
 
 # ProgressBar
 
@@ -28,19 +30,27 @@ I needed some simple and embeddable progress bar frame... this is what I came up
 Demo project to read a certificate from any executable and show it's owner, issuing CA, fingerprint and decide
 whether it's trusted by Windows or not.
 
+This component is used in my [SmartLauncher](https://www.hostingundservice.de/projekte/smart-launcher) freeware app.
+
 # FindLaunchingShortcut
 
 Find out if your app has been launched by a Shortcut file and retrieve the shortcut's filename.
 Intention: If the shortcut's parameters are invalid you now have the opportunity to ask the user to delete it.
+
+This component is used in my [SmartLauncher](https://www.hostingundservice.de/projekte/smart-launcher) freeware app.
 
 # Nullable
 
 An **extremely simple** implementation of Nullable<T>. Consider using Nullable from the Spring4D framework instead
 which is much more sophisticated.
 
+This component is used in my [SmartLauncher](https://www.hostingundservice.de/projekte/smart-launcher) freeware app.
+
 # My version of TEnumConverter
 
 Providing easy conversion between string representation <-> Enum <-> Integer 
+
+This component is used in my [SmartLauncher](https://www.hostingundservice.de/projekte/smart-launcher) freeware app.
 
 # A look at IfThen
 
@@ -50,6 +60,8 @@ when the calculations are costly i.e. when retrieving different rows from a data
 
 Check the IfThen project for a solution using Generics and anonymous functions.
 
+This component is used in my [SmartLauncher](https://www.hostingundservice.de/projekte/smart-launcher) freeware app.
+
 # Yet another TExecutor implementation
 
 TExecutor executes a binary file either in foreground or background.
@@ -58,6 +70,8 @@ TExecutor executes a binary file either in foreground or background.
 * Various methods to detect ending apps: by process id, image name, or image path
 * Option to check if the binary is digitally signed
 
+This component is used in my [SmartLauncher](https://www.hostingundservice.de/projekte/smart-launcher) freeware app.
+
 # Detect when a new drive letter gets attached to the Windows file system
 
 Windows broadcasts new devices to all applications that have a main window handle using the WM_DEVICECHANGE message.
@@ -65,10 +79,14 @@ Unfortunately the necessary constants or structures are not included in Delphi 1
 
 This introduces the missing DBTTypes.pas unit and a sample app that notifies the user when a new drive appears or disappears.
 
+This component is used in my [SmartLauncher](https://www.hostingundservice.de/projekte/smart-launcher) freeware app.
+
 # Read desktop shortcut and extract it's configured icon
 
 Drop a desktop shortcut on this demo window and it will read the shortcut file, determine and retrieve the
 appropriate icon.
+
+This component is used in my [SmartLauncher](https://www.hostingundservice.de/projekte/smart-launcher) freeware app.
 
 # Intercept (duplicate) console application output
 
