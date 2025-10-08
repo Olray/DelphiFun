@@ -54,6 +54,8 @@ This component is used in my [SmartLauncher](https://www.hostingundservice.de/pr
 
 # A look at IfThen
 
+**Starting with Delphi 13.0 the IfThen<t> class is obsolete and can be replaced with the ternary operator based on if..then...else syntax.**
+
 Every new Delphi programmer should be aware that in any common IfThen implementation, both return values for the conditions are
 calculated by the compiler prior to calling the IfThen construct. This poses no problem when working with constants but will
 when the calculations are costly i.e. when retrieving different rows from a database based on the condition.

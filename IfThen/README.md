@@ -1,3 +1,25 @@
+# Obsolete
+
+Starting with Delphi 13.0 the IfThen<t> class is obsolete and can be replaced with the ternary operator based on if..then...else syntax.
+
+Before (Delphi <= 12.3):
+```pascal
+  WriteLn(IfThen<string>.Get(BooleanValue, 'Black', 'White'));
+```
+
+Now (Delphi >= 13.0):
+```pascal
+  WriteLn(if BooleanValue then 'Black' else 'White');
+```
+
+The new ternary operator has lazy evaluation and replaces the following construct:
+```pascal
+  if BooleanValue then
+    Result := 'Black'
+  else  
+    Result := 'White';
+```
+
 # A look at IfThen
 
 At some point in time every Delphi programmer writes some generic IfThen class like this:
