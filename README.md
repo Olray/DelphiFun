@@ -2,6 +2,15 @@
 
 A collection of some functions I wrote for other applications or out of boredom.
 
+# ErrorDialog
+
+**Warning! AI slop ahead!**
+
+A replacement for the Win32 function MessageBox() with advanced formatting options such as bold, italics, and colors,
+as well as the ability to provide additional information. I started this project to determine the current status of AI
+code generation. You can find my experiences with AI in the README.md of the subproject. Spoiler: It didn't go 
+particularly well.
+
 # UnixStreamWriter
 
 From [Wikipedia](https://en.wikipedia.org/wiki/Byte_order_mark): "The Unicode Standard permits the BOM in UTF-8, but
