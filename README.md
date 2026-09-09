@@ -2,6 +2,11 @@
 
 A collection of some functions I wrote for other applications or out of boredom.
 
+# DocumentCreator
+
+A very, very, VERY simple template system with limited functionality which I needed for a hobby project that processes
+more than 65,000 documents.
+
 # ErrorDialog
 
 **Warning! AI slop ahead!**
